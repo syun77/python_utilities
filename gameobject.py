@@ -1,5 +1,6 @@
 import math
 import random
+import pyxel
 
 # ゲームオブジェクト
 class GameObject:
@@ -14,7 +15,9 @@ class GameObject:
     def init(self, x, y, deg, speed):
         self.x, self.y = x, y
         rad = math.radians(deg)
-        self.setSpeed(rad, speed)
+        self.set_speed(rad, speed)
+    def set_position(self, x, y):
+        self.x, self.y = x, y
     def move(self):
         self.x += self.vx
         self.y += self.vy
@@ -52,6 +55,13 @@ class GameObjectManager:
         self.pool = []
         for i in range(0, num):
             self.pool.append(obj())
+    def count_exists(self):
+        cnt = 0
+        for obj in self.pool:
+            if obj.exists == True:
+                cnt += 1
+        return cnt
+
     def add(self):
         for obj in self.pool:
             if obj.exists == False:

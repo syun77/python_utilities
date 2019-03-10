@@ -1,7 +1,7 @@
 import random
 
 class Array2D:
-    def __init__(self, width, height):
+    def __init__(self, width=0, height=0):
         self.create(width, height)
         self.outofrange = -1 # 領域外を指定したときの値
     
@@ -55,6 +55,24 @@ class Array2D:
             return
         
         self.vals[idx] = v
+
+    def count(self, v):
+        # 指定の値の存在数をカウントする
+        ret = 0
+        for j in range(self.height):
+            for i in range(self.width):
+                if self.get(i, j) == v:
+                    ret += 1
+        return ret
+
+    def search(self, v):
+        # 指定の値を検索する。最初に見つかった値を返す
+        for j in range(self.height):
+            for i in range(self.width):
+                if self.get(i, j) == v:
+                    return i, j
+        # 存在しない
+        return -1, -1
 
     def choice(self, v):
         # 指定の値の座標をランダムで取得する
